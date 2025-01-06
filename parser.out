@@ -1,0 +1,200 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     empty -> <empty>
+Rule 2     programa -> declaracoes bloco
+Rule 3     bloco -> BEGIN comando lista_com END
+Rule 4     declaracoes -> def_const def_tipos def_var def_rotina
+Rule 5     def_const -> constante def_const
+Rule 6     def_const -> empty
+Rule 7     def_tipos -> tipo def_tipos
+Rule 8     def_tipos -> empty
+Rule 9     def_var -> variavel def_var
+Rule 10    def_var -> empty
+Rule 11    def_rotina -> rotina def_rotina
+Rule 12    def_rotina -> empty
+Rule 13    id -> ID
+Rule 14    numero -> NUMERO
+Rule 15    constante -> CONST id EQUAL const_valor SEMICOLON
+Rule 16    const_valor -> CONST_VALOR
+Rule 17    const_valor -> exp_const
+Rule 18    tipo -> TYPE id EQUAL tipo_dado SEMICOLON
+Rule 19    variavel -> VAR campo SEMICOLON
+Rule 20    lista_id -> COMMA id lista_id
+Rule 21    lista_id -> empty
+Rule 22    campos -> campo lista_campos
+Rule 23    campo -> id lista_id COLON tipo_dado
+Rule 24    lista_campos -> SEMICOLON campo lista_campos
+Rule 25    lista_campos -> empty
+Rule 26    tipo_dado -> INTEGER
+Rule 27    tipo_dado -> REAL
+Rule 28    tipo_dado -> CHAR
+Rule 29    tipo_dado -> BOOLEAN
+Rule 30    tipo_dado -> ARRAY LB numero RB OF tipo_dado
+Rule 31    tipo_dado -> RECORD campos END
+Rule 32    tipo_dado -> id
+Rule 33    rotina -> FUNCTION id param_rotina COLON tipo_dado bloco_rotina
+Rule 34    rotina -> PROCEDURE id param_rotina bloco_rotina
+Rule 35    param_rotina -> LP campos RP
+Rule 36    param_rotina -> empty
+Rule 37    bloco_rotina -> def_var bloco
+Rule 38    lista_com -> SEMICOLON comando lista_com
+Rule 39    lista_com -> empty
+Rule 40    bloco_com -> bloco
+Rule 41    bloco_com -> comando
+Rule 42    comando -> id nome atribuicao
+Rule 43    comando -> WHILE exp_com DO bloco_com
+Rule 44    comando -> IF exp_com THEN bloco_com else
+Rule 45    comando -> FOR for DO bloco_com
+Rule 46    comando -> WRITE const_valor
+Rule 47    comando -> READ id nome
+Rule 48    for -> id COLONEQUAL parametro TO parametro
+Rule 49    else -> ELSE bloco_com
+Rule 50    else -> empty
+Rule 51    atribuicao -> COLONEQUAL exp
+Rule 52    atribuicao -> empty
+Rule 53    lista_param -> parametro COMMA lista_param
+Rule 54    lista_param -> parametro
+Rule 55    lista_param -> empty
+Rule 56    exp -> parametro exp_l1
+Rule 57    exp -> LP parametro exp_l2
+Rule 58    exp_l1 -> op_mat exp
+Rule 59    exp_l1 -> param_logico exp_logico
+Rule 60    exp_l1 -> empty
+Rule 61    exp_logico -> op_logico exp
+Rule 62    exp_logico -> empty
+Rule 63    param_logico -> op_comp parametro
+Rule 64    param_logico -> empty
+Rule 65    exp_l2 -> op_mat exp RP
+Rule 66    exp_l2 -> param_logico op_logico exp RP
+Rule 67    exp_const -> parametro exp_const_l
+Rule 68    exp_const -> LP parametro op_mat exp_const RP
+Rule 69    exp_const_l -> op_mat exp_const
+Rule 70    exp_const_l -> empty
+Rule 71    exp_com -> parametro param_logico exp_com_l
+Rule 72    exp_com -> LP parametro param_logico op_logico exp_com RP
+Rule 73    exp_com_l -> op_logico exp_com
+Rule 74    exp_com_l -> empty
+Rule 75    parametro -> id nome
+Rule 76    parametro -> numero
+Rule 77    parametro -> FALSE
+Rule 78    parametro -> TRUE
+Rule 79    op_logico -> AND
+Rule 80    op_logico -> OR
+Rule 81    op_comp -> GREAT
+Rule 82    op_comp -> LESS
+Rule 83    op_comp -> EQUALEQUAL
+Rule 84    op_comp -> NOTEQUAL
+Rule 85    op_comp -> GEQUAL
+Rule 86    op_comp -> LEQUAL
+Rule 87    op_mat -> PLUS
+Rule 88    op_mat -> MINUS
+Rule 89    op_mat -> MULTIPLY
+Rule 90    op_mat -> DIVIDE
+Rule 91    nome -> DOT id nome
+Rule 92    nome -> LB parametro RB
+Rule 93    nome -> LP lista_param RP
+Rule 94    nome -> empty
+
+Terminals, with rules where they appear
+
+AND                  : 79
+ARRAY                : 30
+BEGIN                : 3
+BOOLEAN              : 29
+CHAR                 : 28
+COLON                : 23 33
+COLONEQUAL           : 48 51
+COMMA                : 20 53
+CONST                : 15
+CONST_VALOR          : 16
+DIVIDE               : 90
+DO                   : 43 45
+DOT                  : 91
+ELSE                 : 49
+EQUAL                : 15 18
+EQUALEQUAL           : 83
+FALSE                : 77
+FOR                  : 45
+FUNCTION             : 33
+GEQUAL               : 85
+GREAT                : 81
+ID                   : 13
+IF                   : 44
+INTEGER              : 26
+LB                   : 30 92
+LEQUAL               : 86
+LESS                 : 82
+LP                   : 35 57 68 72 93
+MINUS                : 88
+MULTIPLY             : 89
+NOTEQUAL             : 84
+NUMERO               : 14
+OF                   : 30
+OR                   : 80
+PLUS                 : 87
+PROCEDURE            : 34
+RB                   : 30 92
+READ                 : 47
+REAL                 : 27
+RECORD               : 31
+RP                   : 35 65 66 68 72 93
+SEMICOLON            : 15 18 19 24 38
+THEN                 : 44
+TO                   : 48
+TRUE                 : 78
+TYPE                 : 18
+VAR                  : 19
+WHILE                : 43
+WRITE                : 46
+error                : 
+
+Nonterminals, with rules where they appear
+
+END                  : 3 31
+atribuicao           : 42
+bloco                : 2 37 40
+bloco_com            : 43 44 45 49
+bloco_rotina         : 33 34
+campo                : 19 22 24
+campos               : 31 35
+comando              : 3 38 41
+const_valor          : 15 46
+constante            : 5
+declaracoes          : 2
+def_const            : 4 5
+def_rotina           : 4 11
+def_tipos            : 4 7
+def_var              : 4 9 37
+else                 : 44
+empty                : 6 8 10 12 21 25 36 39 50 52 55 60 62 64 70 74 94
+exp                  : 51 58 61 65 66
+exp_com              : 43 44 72 73
+exp_com_l            : 71
+exp_const            : 17 68 69
+exp_const_l          : 67
+exp_l1               : 56
+exp_l2               : 57
+exp_logico           : 59
+for                  : 45
+id                   : 15 18 20 23 32 33 34 42 47 48 75 91
+lista_campos         : 22 24
+lista_com            : 3 38
+lista_id             : 20 23
+lista_param          : 53 93
+nome                 : 42 47 75 91
+numero               : 30 76
+op_comp              : 63
+op_logico            : 61 66 72 73
+op_mat               : 58 65 68 69
+param_logico         : 59 66 71 72
+param_rotina         : 33 34
+parametro            : 48 48 53 54 56 57 63 67 68 71 72 92
+programa             : 0
+rotina               : 11
+tipo                 : 7
+tipo_dado            : 18 23 30 33
+variavel             : 9
+
